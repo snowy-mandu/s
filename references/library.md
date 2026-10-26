@@ -151,3 +151,10 @@ Seedance 실사 클립 여러 개를 고정 카메라 원본 화면 한 장 위�
 - 2.5D 합성: 깊이 추정(Depth Anything V2), 업스케일(Real-ESRGAN), 녹색 배경 생성 후 직접 키잉(zhu185178-255661).
 - Blender를 파이썬 모듈로: 장면·조명·카메라·Cycles 렌더·후처리를 스크립트로, 박자마다 춤 시간을 보정해 킥과 ±0.5프레임 일치(oab10don-457273). 기존 메모리 `blender-headless-pipeline`과 같은 방향.
 - 원본 데이터: `Videos/모션/opus55-videos-data/videos_2026-10-21.json`(703건). 이전 사본 `videos.json`(513건)도 남겨 두었다. 코퍼스 재생성 스크립트는 이번 세션 스크래치에서 썼다(같은 형식: 카테고리별·긴 순서·고유 프롬프트·신규 표시).
+
+## Looks Can Kill 모션그래픽에서 만든 것 (`projects/looks-can-kill/`, 2026-10-26, 리눅스 클라우드 세션)
+
+- `main.js`: 직접 그린 칼날 블록체 `glyph()`(L·I·K·S·C·A·N·O, 획 굵기 `s`를 애니메이션하면 가는 획 → 굵은 획 훑기), O가 눈이 되는 글자(뜨기·시선 방향·동공), 단독 눈 `drawEye`, 화면 가르기 `splitDraw`(선 하나로 둘로 나눠 어긋남·벌어짐, 여러 번 연달아 적용해 글자 파편), 시선 광선 `beam`, 블록 마스크 글자 `blockText`, WebGL 후처리(색 분리·그레인·비네트) + 서브프레임 평균 모션 블러가 한 파일에 있다.
+- `render.js`: 리눅스용 Playwright 렌더러(`still` / `full`). 1080p60 서브프레임 3장 기준 약 1.5fps(20초에 13분).
+- `synth.py`: 영상과 같은 시각표로 킥·스네어·서브·시선 광선 소리·슬레이트 소리를 numpy로 합성.
+- 이 클라우드 환경은 YouTube(yt-dlp)와 Google Fonts·jsDelivr가 막혀 있다. 서체는 npm `@fontsource/*`로 받았다.
